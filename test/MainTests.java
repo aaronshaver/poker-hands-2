@@ -4,10 +4,9 @@ import org.junit.Test;
 public class MainTests {
 
     @Test
-    public void testCardHasSuitsRanks() {
-        Card card = new Card(new Suit(), new Rank());
-        Assert.assertNotNull(card.getSuit());
-        Assert.assertNotNull(card.getRank());
+    public void testAceClubsHasProperToString() {
+        Card card = new Card(Rank.ACE, Suit.CLUB);
+        Assert.assertEquals("Ac", card.toString());
     }
 
 }
