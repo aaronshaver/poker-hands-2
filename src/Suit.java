@@ -1,5 +1,8 @@
 public enum Suit {
-    CLUB("c");
+    CLUBS("c"),
+    DIAMONDS("d"),
+    HEARTS("h"),
+    SPADES("s");
 
     private final String text;
 
