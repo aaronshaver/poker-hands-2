@@ -1,6 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class MainTests {
 
     @Test
@@ -23,6 +25,16 @@ public class MainTests {
         Assert.assertEquals(Suit.class, card.getSuit().getClass());
         Assert.assertEquals(Rank.class, card.getRank().getClass());
         Assert.assertEquals(originalSize - 1, deck.getCount());
+    }
+
+    @Test
+    public void testDealHandDealsTheRightSizeAndDeckSizeIsRightToo() {
+        Deck deck = new Deck();
+        final int originalSize = deck.getCount();
+        ArrayList<Card> hand = deck.getHand();
+        Assert.assertEquals(5, hand.size());
+        Assert.assertEquals(originalSize - 5, deck.getCount());
+        System.out.println(hand);
     }
 
 }

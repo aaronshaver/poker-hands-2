@@ -18,11 +18,19 @@ public class Deck {
     }
 
     public Card dealCard() {
-        // TODO: there might an off by 1 here; test it
         Random random = new Random();
         final int randomIndex = random.nextInt((cards.size() - 1) + 1);
         Card card = cards.get(randomIndex);
         cards.remove(randomIndex);
         return card;
+    }
+
+    public ArrayList<Card> getHand() {
+        ArrayList<Card> hand = new ArrayList<>();
+        while (hand.size() < 5) {
+            Card card = this.dealCard();
+            hand.add(card);
+        }
+        return hand;
     }
 }
