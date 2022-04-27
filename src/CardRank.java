@@ -1,4 +1,4 @@
-public enum Rank {
+public enum CardRank {
     ACE("A"),
     TWO("2"),
     THREE("3"),
@@ -16,7 +16,7 @@ public enum Rank {
 
     private final String text;
 
-    Rank(final String text) {
+    CardRank(final String text) {
         this.text = text;
     }
 

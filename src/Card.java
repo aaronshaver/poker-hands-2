@@ -1,11 +1,11 @@
 
 public class Card {
     private final Suit suit;
-    private final Rank rank;
+    private final CardRank cardRank;
 
-    Card(Rank rank, Suit suit) {
+    Card(CardRank cardRank, Suit suit) {
         this.suit = suit;
-        this.rank = rank;
+        this.cardRank = cardRank;
 
     }
 
@@ -13,8 +13,8 @@ public class Card {
         return this.suit;
     }
 
-    public Rank getRank() {
-        return this.rank;
+    public CardRank getRank() {
+        return this.cardRank;
     }
 
     @Override

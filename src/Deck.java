@@ -7,8 +7,8 @@ public class Deck {
     public Deck() {
 
         for (Suit suit : Suit.values()) {
-            for (Rank rank : Rank.values()) {
-                cards.add(new Card(rank, suit));
+            for (CardRank cardRank : CardRank.values()) {
+                cards.add(new Card(cardRank, suit));
             }
         }
     }

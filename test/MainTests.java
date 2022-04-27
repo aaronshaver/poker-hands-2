@@ -7,7 +7,7 @@ public class MainTests {
 
     @Test
     public void testAceClubsHasProperToString() {
-        Card card = new Card(Rank.ACE, Suit.CLUBS);
+        Card card = new Card(CardRank.ACE, Suit.CLUBS);
         Assert.assertEquals("Ac", card.toString());
     }
 
@@ -23,7 +23,7 @@ public class MainTests {
         final int originalSize = deck.getCount();
         Card card = deck.dealCard();
         Assert.assertEquals(Suit.class, card.getSuit().getClass());
-        Assert.assertEquals(Rank.class, card.getRank().getClass());
+        Assert.assertEquals(CardRank.class, card.getRank().getClass());
         Assert.assertEquals(originalSize - 1, deck.getCount());
     }
 
@@ -37,4 +37,39 @@ public class MainTests {
         System.out.println(hand);
     }
 
+    @Test
+        public void testAceCardHighHand() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardRank.ACE, Suit.CLUBS));
+        cards.add(new Card(CardRank.THREE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.FIVE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.SIX, Suit.DIAMONDS));
+        String handRank = HandRankEngine.getRank(cards);
+        Assert.assertEquals("High card", handRank);
+    }
+
+    @Test
+    public void testFlushHand() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.THREE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.FIVE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.SIX, Suit.DIAMONDS));
+        String handRank = HandRankEngine.getRank(cards);
+        Assert.assertEquals("Flush", handRank);
+    }
+
+    @Test
+    public void testOnePairHand() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.ACE, Suit.CLUBS));
+        cards.add(new Card(CardRank.FOUR, Suit.HEARTS));
+        cards.add(new Card(CardRank.FIVE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.SIX, Suit.DIAMONDS));
+        String handRank = HandRankEngine.getRank(cards);
+        Assert.assertEquals("One pair", handRank);
+    }
 }
