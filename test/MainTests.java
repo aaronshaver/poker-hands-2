@@ -74,6 +74,33 @@ public class MainTests {
     }
 
     @Test
+    public void testStraightHand() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardRank.TWO, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.THREE, Suit.CLUBS));
+        cards.add(new Card(CardRank.FOUR, Suit.HEARTS));
+        cards.add(new Card(CardRank.FIVE, Suit.SPADES));
+        cards.add(new Card(CardRank.SIX, Suit.DIAMONDS));
+        String handRank = HandRankEngine.getHandRank(cards);
+        Assert.assertEquals("Straight", handRank);
+    }
+
+    @Test
+    public void testGetNumericRankLowAce() {
+        Assert.assertEquals(1, HandRankEngine.getNumericRank(CardRank.ACE, true));
+    }
+
+    @Test
+    public void testGetNumericRankHighAce() {
+        Assert.assertEquals(13, HandRankEngine.getNumericRank(CardRank.ACE, false));
+    }
+
+    @Test
+    public void testGetNumericRankNonAce() {
+        Assert.assertEquals(11, HandRankEngine.getNumericRank(CardRank.JACK, false));
+    }
+
+    @Test
     public void testThreeOfAKindHand() {
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));

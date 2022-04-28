@@ -7,6 +7,7 @@ public class HandRankEngine {
         final Suit suitFirstCard = hand.get(0).getSuit();
         final boolean isFlush = hand.stream()
                 .allMatch(card -> card.getSuit() == suitFirstCard);
+
         if (isFlush) return "Flush";
 
         final List<CardRank> handRanks = hand.stream()
@@ -38,4 +39,15 @@ public class HandRankEngine {
 
         return "High card";
     }
+
+    public static int getNumericRank(CardRank cardRank, boolean hasFive) {
+        if (cardRank.equals(CardRank.ACE)) {
+            if (hasFive) return 1;
+            else return 13;
+        }
+
+        return 4;
+    }
+
+
 }
