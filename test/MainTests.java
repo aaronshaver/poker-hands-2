@@ -50,6 +50,18 @@ public class MainTests {
     }
 
     @Test
+    public void testFullHouseHand() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.ACE, Suit.CLUBS));
+        cards.add(new Card(CardRank.ACE, Suit.HEARTS));
+        cards.add(new Card(CardRank.FOUR, Suit.SPADES));
+        cards.add(new Card(CardRank.FOUR, Suit.DIAMONDS));
+        String handRank = HandRankEngine.getHandRank(cards);
+        Assert.assertEquals("Full house", handRank);
+    }
+
+    @Test
     public void testFlushHand() {
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));

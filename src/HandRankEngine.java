@@ -28,6 +28,8 @@ public class HandRankEngine {
             return "Four of a kind";
         } else if (rankCountsSorted.equals(List.of(1, 1, 3))) {
             return "Three of a kind";
+        } else if (rankCountsSorted.equals(List.of(2, 3))) {
+            return "Full house";
         } else if (rankCountsSorted.equals(List.of(1, 2, 2))) {
             return "Two pair";
         } else if (rankCountsSorted.equals(List.of(1, 1, 1, 2))) {
