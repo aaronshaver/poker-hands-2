@@ -38,15 +38,15 @@ public class MainTests {
     }
 
     @Test
-        public void testAceCardHighHand() {
+    public void testFourOfAKindHand() {
         ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));
         cards.add(new Card(CardRank.ACE, Suit.CLUBS));
-        cards.add(new Card(CardRank.THREE, Suit.DIAMONDS));
-        cards.add(new Card(CardRank.FOUR, Suit.DIAMONDS));
-        cards.add(new Card(CardRank.FIVE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.ACE, Suit.HEARTS));
+        cards.add(new Card(CardRank.ACE, Suit.SPADES));
         cards.add(new Card(CardRank.SIX, Suit.DIAMONDS));
         String handRank = HandRankEngine.getHandRank(cards);
-        Assert.assertEquals("High card", handRank);
+        Assert.assertEquals("Four of a kind", handRank);
     }
 
     @Test
@@ -62,6 +62,30 @@ public class MainTests {
     }
 
     @Test
+    public void testThreeOfAKindHand() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.ACE, Suit.CLUBS));
+        cards.add(new Card(CardRank.ACE, Suit.HEARTS));
+        cards.add(new Card(CardRank.FOUR, Suit.SPADES));
+        cards.add(new Card(CardRank.SIX, Suit.DIAMONDS));
+        String handRank = HandRankEngine.getHandRank(cards);
+        Assert.assertEquals("Three of a kind", handRank);
+    }
+
+    @Test
+    public void testTwoPairHand() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.ACE, Suit.CLUBS));
+        cards.add(new Card(CardRank.FOUR, Suit.HEARTS));
+        cards.add(new Card(CardRank.FOUR, Suit.SPADES));
+        cards.add(new Card(CardRank.SIX, Suit.DIAMONDS));
+        String handRank = HandRankEngine.getHandRank(cards);
+        Assert.assertEquals("Two pair", handRank);
+    }
+
+    @Test
     public void testOnePairHand() {
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));
@@ -74,14 +98,15 @@ public class MainTests {
     }
 
     @Test
-    public void testFourOfAKindHand() {
+    public void testAceCardHighHand() {
         ArrayList<Card> cards = new ArrayList<>();
-        cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));
         cards.add(new Card(CardRank.ACE, Suit.CLUBS));
-        cards.add(new Card(CardRank.ACE, Suit.HEARTS));
-        cards.add(new Card(CardRank.ACE, Suit.SPADES));
+        cards.add(new Card(CardRank.THREE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.FIVE, Suit.DIAMONDS));
         cards.add(new Card(CardRank.SIX, Suit.DIAMONDS));
         String handRank = HandRankEngine.getHandRank(cards);
-        Assert.assertEquals("Four of a kind", handRank);
+        Assert.assertEquals("High card", handRank);
     }
+
 }

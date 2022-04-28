@@ -21,13 +21,18 @@ public class HandRankEngine {
                 rankCounts.put(cardRank, rankCounts.get(cardRank) + 1);
             }
         }
-        System.out.println(rankCounts);
 
         List<Integer> rankCountsSorted = rankCounts.values().stream().sorted().toList();
-        System.out.println(rankCountsSorted);
 
-
-//            return "One pair";
+        if (rankCountsSorted.equals(List.of(1, 4))) {
+            return "Four of a kind";
+        } else if (rankCountsSorted.equals(List.of(1, 1, 3))) {
+            return "Three of a kind";
+        } else if (rankCountsSorted.equals(List.of(1, 2, 2))) {
+            return "Two pair";
+        } else if (rankCountsSorted.equals(List.of(1, 1, 1, 2))) {
+            return "One pair";
+        }
 
         return "High card";
     }
