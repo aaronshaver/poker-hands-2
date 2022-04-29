@@ -96,8 +96,13 @@ public class MainTests {
     }
 
     @Test
-    public void testGetNumericRankNonAce() {
+    public void testGetNumericRankNonAceJack() {
         Assert.assertEquals(11, HandRankEngine.getNumericRank(CardRank.JACK, false));
+    }
+
+    @Test
+    public void testGetNumericRankNonAceFour() {
+        Assert.assertEquals(4, HandRankEngine.getNumericRank(CardRank.FOUR, false));
     }
 
     @Test
