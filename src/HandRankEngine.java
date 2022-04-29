@@ -9,11 +9,26 @@ public class HandRankEngine {
 
         final List<CardRank> handRanks = hand.stream()
                 .map(Card::getRank)
+                .sorted()
                 .toList();
 
         final HashMap<CardRank, Integer> rankCounts = getRankCounts(handRanks);
 
         List<Integer> rankCountsSorted = rankCounts.values().stream().sorted().toList();
+
+        List<Integer> handRanksNumeric = handRanks.stream()
+                .map(cardRank -> getNumericRank(cardRank, false))
+                .toList();
+        boolean isStraight = true;
+        for (int i = 1; i < handRanksNumeric.size(); i++) {
+            if (Math.abs(handRanksNumeric.get(i) - handRanksNumeric.get(i - 1)) > 1) {
+                isStraight = false;
+                break;
+            }
+        }
+        if (isStraight) {
+            return "Straight";
+        }
 
         if (rankCountsSorted.equals(List.of(1, 4))) {
             return "Four of a kind";
@@ -49,6 +64,14 @@ public class HandRankEngine {
         return rankCounts;
     }
 
+    /**
+     *
+     * @param cardRank  Where "rank" means 2 for Two, 11 for Jack, etc.
+     * @param hasFive   A straight which includes 5 is the only case of an Ace being low;
+     *                  Note we're making the simplifying assumption of not ranking four of kinds, full houses, etc.
+     *                  against each other, where an Ace's numeric equivalent would matter
+     * @return
+     */
     public static int getNumericRank(CardRank cardRank, boolean hasFive) {
         if (cardRank.equals(CardRank.ACE)) {
             if (hasFive) return 1;
