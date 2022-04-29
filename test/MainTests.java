@@ -34,7 +34,6 @@ public class MainTests {
         ArrayList<Card> hand = deck.getHand();
         Assert.assertEquals(5, hand.size());
         Assert.assertEquals(originalSize - 5, deck.getCount());
-        System.out.println(hand);
     }
 
     @Test
