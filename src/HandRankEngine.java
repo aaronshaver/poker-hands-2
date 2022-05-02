@@ -16,8 +16,11 @@ public class HandRankEngine {
 
         List<Integer> rankCountsSorted = rankCounts.values().stream().sorted().toList();
 
+        final boolean hasFive = rankCounts.containsKey(CardRank.FIVE);
+
         List<Integer> handRanksNumeric = handRanks.stream()
-                .map(cardRank -> getNumericRank(cardRank, false))
+                .map(cardRank -> getNumericRank(cardRank, hasFive))
+                .sorted()
                 .toList();
         boolean isStraight = true;
         for (int i = 1; i < handRanksNumeric.size(); i++) {
@@ -75,7 +78,7 @@ public class HandRankEngine {
     public static int getNumericRank(CardRank cardRank, boolean hasFive) {
         if (cardRank.equals(CardRank.ACE)) {
             if (hasFive) return 1;
-            else return 13;
+            else return 14;
         }
         return switch (cardRank) {
             case TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN -> Integer.parseInt(cardRank.toString());

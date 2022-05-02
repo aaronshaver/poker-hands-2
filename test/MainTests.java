@@ -73,6 +73,18 @@ public class MainTests {
     }
 
     @Test
+    public void testStraightHandHighNumsNoAce() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(CardRank.NINE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.JACK, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.TEN, Suit.CLUBS));
+        cards.add(new Card(CardRank.QUEEN, Suit.HEARTS));
+        cards.add(new Card(CardRank.KING, Suit.SPADES));
+        String handRank = HandRankEngine.getHandRank(cards);
+        Assert.assertEquals("Straight", handRank);
+    }
+
+    @Test
     public void testStraightHandLowNumsNoAce() {
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(CardRank.SIX, Suit.DIAMONDS));
@@ -85,13 +97,13 @@ public class MainTests {
     }
 
     @Test
-    public void testStraightHandHighNumsNoAce() {
+    public void testStraightHandLowNumsWithAce() {
         ArrayList<Card> cards = new ArrayList<>();
-        cards.add(new Card(CardRank.NINE, Suit.DIAMONDS));
-        cards.add(new Card(CardRank.JACK, Suit.DIAMONDS));
-        cards.add(new Card(CardRank.TEN, Suit.CLUBS));
-        cards.add(new Card(CardRank.QUEEN, Suit.HEARTS));
-        cards.add(new Card(CardRank.KING, Suit.SPADES));
+        cards.add(new Card(CardRank.ACE, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.TWO, Suit.DIAMONDS));
+        cards.add(new Card(CardRank.THREE, Suit.CLUBS));
+        cards.add(new Card(CardRank.FOUR, Suit.HEARTS));
+        cards.add(new Card(CardRank.FIVE, Suit.SPADES));
         String handRank = HandRankEngine.getHandRank(cards);
         Assert.assertEquals("Straight", handRank);
     }
@@ -115,7 +127,7 @@ public class MainTests {
 
     @Test
     public void testGetNumericRankHighAce() {
-        Assert.assertEquals(13, HandRankEngine.getNumericRank(CardRank.ACE, false));
+        Assert.assertEquals(14, HandRankEngine.getNumericRank(CardRank.ACE, false));
     }
 
     @Test
