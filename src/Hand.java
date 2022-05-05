@@ -3,9 +3,6 @@ import java.util.ArrayList;
 public class Hand {
     private final ArrayList<Card> cards = new ArrayList<>();
 
-    Hand() {
-    }
-
     public void add(Card card) {
         if (cards.size() == 5) throw new UnsupportedOperationException("Cannot add more than 5 cards");
         this.cards.add(card);
