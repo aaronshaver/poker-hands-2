@@ -3,6 +3,9 @@ import java.util.*;
 public class HandRankEngine {
 
     public static String getHandRank(Hand hand) {
+        if (hand.size() != 5) {
+            throw new IllegalArgumentException(String.format("Can only evaluate hands with exactly 5 cards; %d cards were supplied", hand.size()));
+        }
 
         boolean isFlush = getIsFlush(hand);
 

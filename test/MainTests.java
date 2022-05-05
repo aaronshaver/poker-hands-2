@@ -1,9 +1,12 @@
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.ArrayList;
+import org.junit.rules.ExpectedException;
 
 public class MainTests {
+
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
 
     @Test
     public void testAceClubsHasProperToString() {
@@ -34,6 +37,31 @@ public class MainTests {
         Hand hand = deck.getHand();
         Assert.assertEquals(5, hand.size());
         Assert.assertEquals(originalSize - 5, deck.getCount());
+    }
+
+    @Test
+    public void testExceptionOnAdd6thCardToHand() {
+        exceptionRule.expect(UnsupportedOperationException.class);
+        exceptionRule.expectMessage("Cannot add more than 5 cards");
+        Hand hand = new Hand();
+        hand.add(new Card(CardRank.ACE, Suit.CLUBS));
+        hand.add(new Card(CardRank.ACE, Suit.HEARTS));
+        hand.add(new Card(CardRank.ACE, Suit.SPADES));
+        hand.add(new Card(CardRank.SIX, Suit.DIAMONDS));
+        hand.add(new Card(CardRank.SIX, Suit.CLUBS));
+        hand.add(new Card(CardRank.SIX, Suit.HEARTS));
+    }
+
+    @Test
+    public void testExceptionOnLessThan5CardHand() {
+        exceptionRule.expect(IllegalArgumentException.class);
+        exceptionRule.expectMessage("Can only evaluate hands with exactly 5 cards; 4 cards were supplied");
+        Hand hand = new Hand();
+        hand.add(new Card(CardRank.ACE, Suit.CLUBS));
+        hand.add(new Card(CardRank.ACE, Suit.HEARTS));
+        hand.add(new Card(CardRank.ACE, Suit.SPADES));
+        hand.add(new Card(CardRank.SIX, Suit.DIAMONDS));
+        HandRankEngine.getHandRank(hand);
     }
 
     @Test
