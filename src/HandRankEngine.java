@@ -2,12 +2,11 @@ import java.util.*;
 
 public class HandRankEngine {
 
-    public static String getHandRank(ArrayList<Card> hand) {
+    public static String getHandRank(Hand hand) {
 
         boolean isFlush = getIsFlush(hand);
-        if (isFlush) return "Flush";
 
-        final List<CardRank> handRanks = hand.stream()
+        final List<CardRank> handRanks = hand.getCards().stream()
                 .map(Card::getRank)
                 .sorted()
                 .toList();
@@ -29,9 +28,16 @@ public class HandRankEngine {
                 break;
             }
         }
-        if (isStraight) {
-            return "Straight";
+
+        if (isFlush && isStraight) {
+            if (handRanksNumeric.contains(10) && handRanksNumeric.contains(14)) {
+                return "Royal flush";
+            }
         }
+
+        if (isFlush && isStraight) return "Straight flush";
+        if (isStraight) return "Straight";
+        if (isFlush) return "Flush";
 
         if (rankCountsSorted.equals(List.of(1, 4))) {
             return "Four of a kind";
@@ -48,9 +54,9 @@ public class HandRankEngine {
         return "High card";
     }
 
-    private static boolean getIsFlush(ArrayList<Card> hand) {
-        final Suit suitFirstCard = hand.get(0).getSuit();
-        final boolean isFlush = hand.stream()
+    private static boolean getIsFlush(Hand hand) {
+        final Suit suitFirstCard = hand.getCards().get(0).getSuit();
+        final boolean isFlush = hand.getCards().stream()
                 .allMatch(card -> card.getSuit() == suitFirstCard);
         return isFlush;
     }

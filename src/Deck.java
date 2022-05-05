@@ -25,11 +25,11 @@ public class Deck {
         return card;
     }
 
-    public ArrayList<Card> getHand() {
-        ArrayList<Card> hand = new ArrayList<>();
-        while (hand.size() < 5) {
+    public Hand getHand() {
+        Hand hand = new Hand();
+        while (hand.getSize() < 5) {
             Card card = this.dealCard();
-            hand.add(card);
+            hand.addCard(card);
         }
         return hand;
     }
