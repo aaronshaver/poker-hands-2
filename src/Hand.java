@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Card> cards;
+    private final ArrayList<Card> cards = new ArrayList<>();
 
     Hand() {
     }
 
-    public void addCard(Card card) {
+    public void add(Card card) {
         this.cards.add(card);
     }
 
-    public int getSize() {
+    public int size() {
         return cards.size();
     }
 

@@ -27,9 +27,9 @@ public class Deck {
 
     public Hand getHand() {
         Hand hand = new Hand();
-        while (hand.getSize() < 5) {
+        while (hand.size() < 5) {
             Card card = this.dealCard();
-            hand.addCard(card);
+            hand.add(card);
         }
         return hand;
     }
