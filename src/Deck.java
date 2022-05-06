@@ -11,6 +11,9 @@ public class Deck {
                 cards.add(new Card(cardRank, suit));
             }
         }
+        if (cards.size() > 52) {
+            throw new IllegalStateException("Deck somehow contained more than 52 cards");
+        }
     }
 
     public int getCount() {

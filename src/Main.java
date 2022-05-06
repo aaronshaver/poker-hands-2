@@ -3,6 +3,18 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
+        final int numHands = getNumHands(args);
+        System.out.printf("%nGenerating up to %d poker hand(s)... (will exit early if Royal flush)%n", numHands);
+
+        final HashMap<String, Integer> handRankCounts = getHandRankCounts(numHands);
+
+        handRankCounts.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEach(System.out::println);
+    }
+
+    private static int getNumHands(String[] args) {
         final Optional<String> numHandsRaw = Arrays.stream(args).findFirst();
         int numHands;
         if(numHandsRaw.isPresent()) {
@@ -10,11 +22,11 @@ public class Main {
         } else {
             throw new IllegalArgumentException("Must specify number of poker hands to generate as first argument");
         }
+        return numHands;
+    }
 
-        System.out.printf("%nGenerating up to %d poker hand(s)... (will exit early if Royal flush)%n", numHands);
-
+    private static HashMap<String, Integer> getHandRankCounts(final int numHands) {
         HashMap<String, Integer> handRankCounts = new HashMap<>();
-
         int i;
         for (i = 0; i < numHands; i++) {
             Deck deck = new Deck();
@@ -30,12 +42,8 @@ public class Main {
 
             if (handRank.equals("Royal flush")) break;
         }
-
         System.out.printf("Generated %d poker hands%n", i);
-        handRankCounts.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue())
-                .forEach(System.out::println);
+        return handRankCounts;
     }
 
 }
