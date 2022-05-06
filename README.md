@@ -11,4 +11,4 @@ models deck of cards, deals ~800K hands/sec, evaluates hands, records stats
 
 On commandline, supply an integer for number of hands you'd like to deal as your first and only argument
 
-In an IDE like IntelliJ, run the main() method of the Main class
+In an IDE like IntelliJ, run the main() method of the Main class (supplying the "number of hands" argument in the run configuration)
