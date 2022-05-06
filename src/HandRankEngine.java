@@ -7,8 +7,6 @@ public class HandRankEngine {
             throw new IllegalArgumentException(String.format("Can only evaluate hands with exactly 5 cards; %d cards were supplied", hand.size()));
         }
 
-        boolean isFlush = getIsFlush(hand);
-
         final List<CardRank> handRanks = hand.getCards().stream()
                 .map(Card::getRank)
                 .sorted()
@@ -24,6 +22,7 @@ public class HandRankEngine {
                 .map(cardRank -> getNumericRank(cardRank, hasFive))
                 .sorted()
                 .toList();
+
         boolean isStraight = true;
         for (int i = 1; i < handRanksNumeric.size(); i++) {
             if (Math.abs(handRanksNumeric.get(i) - handRanksNumeric.get(i - 1)) > 1) {
@@ -32,6 +31,7 @@ public class HandRankEngine {
             }
         }
 
+        boolean isFlush = getIsFlush(hand);
         if (isFlush && isStraight) {
             if (handRanksNumeric.contains(10) && handRanksNumeric.contains(14)) {
                 return "Royal flush";
@@ -42,18 +42,12 @@ public class HandRankEngine {
         if (isStraight) return "Straight";
         if (isFlush) return "Flush";
 
-        if (rankCountsSorted.equals(List.of(1, 4))) {
-            return "Four of a kind";
-        } else if (rankCountsSorted.equals(List.of(1, 1, 3))) {
-            return "Three of a kind";
-        } else if (rankCountsSorted.equals(List.of(2, 3))) {
-            return "Full house";
-        } else if (rankCountsSorted.equals(List.of(1, 2, 2))) {
-            return "Two pair";
-        } else if (rankCountsSorted.equals(List.of(1, 1, 1, 2))) {
-            return "One pair";
-        }
-        
+        if (rankCountsSorted.equals(List.of(1, 4))) return "Four of a kind";
+        if (rankCountsSorted.equals(List.of(1, 1, 3))) return "Three of a kind";
+        if (rankCountsSorted.equals(List.of(2, 3))) return "Full house";
+        if (rankCountsSorted.equals(List.of(1, 2, 2))) return "Two pair";
+        if (rankCountsSorted.equals(List.of(1, 1, 1, 2))) return "One pair";
+
         return "High card";
     }
 
